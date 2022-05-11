@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestGit">
         <activity
-            android:name="com.sameer.firstdayintern.MainActivity"
+            android:name=".filterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MultiRecyclerView"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/id_bar"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="1dp"
+            android:background="@color/purple_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/id_orderid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="#2222222"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/id_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/id_paid_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Order . Paid"
+            app:layout_constraintStart_toEndOf="@+id/id_bar"
+            app:layout_constraintTop_toBottomOf="@+id/id_orderid" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="2 items"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/id_bar"
+            app:layout_constraintTop_toBottomOf="@+id/id_paid_type" />
+
+        <TextView
+            android:id="@+id/id_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="by Kyaw Kyaw"
+            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+        <TextView
+            android:id="@+id/id_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="1 min"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_orderid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/id_orderid" />
+
+        <TextView
+            android:id="@+id/id_pay_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KBZ Pay"
+            app:layout_constraintBottom_toBottomOf="@+id/id_paid_type"
+            app:layout_constraintEnd_toEndOf="@+id/id_min"
+            app:layout_constraintTop_toTopOf="@+id/id_paid_type" />
+
+        <TextView
+            android:id="@+id/id_price2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2200000 ks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/id_name"
+            app:layout_constraintEnd_toEndOf="@+id/id_pay_type"
+            app:layout_constraintTop_toTopOf="@+id/id_name" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
