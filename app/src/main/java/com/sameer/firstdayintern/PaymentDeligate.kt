@@ -1,5 +1,5 @@
 package com.sameer.firstdayintern
 
 interface PaymentDeligate {
-    fun onTapItem(data: String)
+    fun onTapItem(data: String,position : Int)
 }

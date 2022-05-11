@@ -4,16 +4,25 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.RadioButton
+import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sameer.firstdayintern.adapter.PaymentPlatformAdapter
 
-class filterActivity : AppCompatActivity() {
+class filterActivity : AppCompatActivity(),PaymentDeligate {
+
+    // post parameters
+     var id : Int = 4
+     var time : String = "Today"
+     var payment_status = "paid"
+     var paid_platform = "Aya Bank"
+
+
+    //Input
+    lateinit var id_input : EditText
+    //Input
 
     //Time
 
@@ -30,11 +39,15 @@ class filterActivity : AppCompatActivity() {
 
     lateinit var payment_frame_click : FrameLayout
     lateinit var payment_frame_hide : FrameLayout
+    lateinit var paid : TextView
+    lateinit var unpaid : TextView
+    lateinit var reject : TextView
 
     //Payment
 
     //Platform
 
+    var payList = mutableListOf<String>("Cash","AyaPay","KBZPay","WavePay","KBZ Bank","Aya Bank","CB Bank","Yoma Bank")
     lateinit var  platform_frame_click : FrameLayout
     lateinit var  platform_frame_hide : FrameLayout
     lateinit var  recyclerView: RecyclerView
@@ -84,10 +97,15 @@ class filterActivity : AppCompatActivity() {
 
         payment_frame_click = findViewById(R.id.id_payment_frame_click)
         payment_frame_hide = findViewById(R.id.id_payment_frame_hide)
+        paid = findViewById(R.id.id_payment_paid)
+        unpaid = findViewById(R.id.id_payment_unpaid)
+        reject = findViewById(R.id.id_payment_reject)
 
         payment_frame_click.setOnClickListener {
             showHide(payment_frame_hide)
         }
+
+        paymentOnclickListeners()
 
         // Payment platform Recycler
 
@@ -99,20 +117,61 @@ class filterActivity : AppCompatActivity() {
             showHide(platform_frame_hide)
         }
 
-        var pay_list = listOf<String>("Cash","AyaPay","KBZPay","WavePay","KBZ Bank","Aya Bank","CB Bank","Yoma Bank")
         recyclerView.layoutManager = GridLayoutManager(this,4)
-        val paymentPlatformAdapter : PaymentPlatformAdapter = PaymentPlatformAdapter(applicationContext,pay_list)
-
+        val paymentPlatformAdapter : PaymentPlatformAdapter = PaymentPlatformAdapter(applicationContext,payList,this)
         recyclerView.adapter = paymentPlatformAdapter
+
+
+
         // Payment platform Recycler
 
         //Search
 
-        search = findViewById(R.id.id_search)
+        search = findViewById(R.id.btnSearch)
+        id_input = findViewById(R.id.id_filter_input)
         search.setOnClickListener {
 
+//            if(id_input.text != null){
+//                id = id_input.text.toString().toInt()
+//            }else{
+//                Toast.makeText(applicationContext,"Enter id", Toast.LENGTH_SHORT).show()
+//            }
+            startActivity(SearchActivity.intent(this,id))
         }
         //Search
+
+        changeSelectedBackground()
+
+    }
+
+    private fun paymentOnclickListeners(){
+
+        paid.setOnClickListener {
+            paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
+            unpaid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
+            reject.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
+            payment_status = "paid"
+        }
+
+        unpaid.setOnClickListener {
+            paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
+            unpaid.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
+            reject.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
+            payment_status = "unpaid"
+        }
+
+        reject.setOnClickListener {
+            paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
+            unpaid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
+            reject.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
+            payment_status = "rejected"
+        }
+
+    }
+
+    fun changeSelectedBackground(){
+        rb1.isChecked = true
+        paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
 
     }
 
@@ -123,24 +182,29 @@ class filterActivity : AppCompatActivity() {
                 rb2.isChecked = false
                 rb3.isChecked = false
                 rb4.isChecked = false
+                time = rb1.text.toString()
             }
             rb2 -> {
                 rb1.isChecked = false
                 rb2.isChecked = true
                 rb3.isChecked = false
                 rb4.isChecked = false
+                time = rb1.text.toString()
+
             }
             rb3 -> {
                 rb1.isChecked = false
                 rb2.isChecked = false
                 rb3.isChecked = true
                 rb4.isChecked = false
+                time = rb1.text.toString()
             }
             rb4 -> {
                 rb1.isChecked = false
                 rb2.isChecked = false
                 rb3.isChecked = false
                 rb4.isChecked = true
+                time = rb1.text.toString()
             }
         }
     }
@@ -150,6 +214,11 @@ class filterActivity : AppCompatActivity() {
             view.visibility = View.GONE
         else
             view.visibility = View.VISIBLE
+    }
+
+    override fun onTapItem(data: String,position : Int) {
+           paid_platform = data
+         Toast.makeText(applicationContext,data,Toast.LENGTH_SHORT).show()
     }
 
     companion object{
