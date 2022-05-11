@@ -1,4 +1,4 @@
-package com.sameer.testgit
+package com.sameer.firstdayintern
 
 import org.junit.Test
 
