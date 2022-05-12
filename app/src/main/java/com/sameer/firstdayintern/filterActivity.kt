@@ -16,7 +16,7 @@ class filterActivity : AppCompatActivity(),PaymentDeligate {
     // post parameters
      var id : Int = 4
      var time : String = "Today"
-     var payment_status = "paid"
+     var payment_status = "Paid"
      var paid_platform = "Aya Bank"
 
 
@@ -71,6 +71,10 @@ class filterActivity : AppCompatActivity(),PaymentDeligate {
         rb3 = findViewById(R.id.id_rb3)
         rb4 = findViewById(R.id.id_rb4)
 
+        //initialize radio button
+
+        rb1.isChecked = true
+
         rb1.setOnClickListener {
             customRadioButtonOnClick(rb1)
         }
@@ -100,6 +104,8 @@ class filterActivity : AppCompatActivity(),PaymentDeligate {
         paid = findViewById(R.id.id_payment_paid)
         unpaid = findViewById(R.id.id_payment_unpaid)
         reject = findViewById(R.id.id_payment_reject)
+
+        paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
 
         payment_frame_click.setOnClickListener {
             showHide(payment_frame_hide)
@@ -131,16 +137,14 @@ class filterActivity : AppCompatActivity(),PaymentDeligate {
         id_input = findViewById(R.id.id_filter_input)
         search.setOnClickListener {
 
-//            if(id_input.text != null){
-//                id = id_input.text.toString().toInt()
-//            }else{
-//                Toast.makeText(applicationContext,"Enter id", Toast.LENGTH_SHORT).show()
-//            }
-            startActivity(SearchActivity.intent(this,id))
+          //  if(id_input.text.length == 0){
+                id = id_input.text.toString().toInt()
+               // Toast.makeText(applicationContext,id.toString(),Toast.LENGTH_LONG).show()
+                startActivity(SearchActivity.intent(this,id,time,payment_status,paid_platform))
+          //
+
         }
         //Search
-
-        changeSelectedBackground()
 
     }
 
@@ -150,22 +154,23 @@ class filterActivity : AppCompatActivity(),PaymentDeligate {
             paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
             unpaid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
             reject.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
-            payment_status = "paid"
+            payment_status = "Paid"
         }
 
         unpaid.setOnClickListener {
             paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
             unpaid.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
             reject.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
-            payment_status = "unpaid"
+            payment_status = "Unpaid"
         }
 
         reject.setOnClickListener {
             paid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
             unpaid.background = ContextCompat.getDrawable(applicationContext,R.drawable.chip)
             reject.background = ContextCompat.getDrawable(applicationContext,R.drawable.selected_chips)
-            payment_status = "rejected"
+            payment_status = "Rejected"
         }
+
 
     }
 
@@ -189,22 +194,21 @@ class filterActivity : AppCompatActivity(),PaymentDeligate {
                 rb2.isChecked = true
                 rb3.isChecked = false
                 rb4.isChecked = false
-                time = rb1.text.toString()
-
+                time = rb2.text.toString()
             }
             rb3 -> {
                 rb1.isChecked = false
                 rb2.isChecked = false
                 rb3.isChecked = true
                 rb4.isChecked = false
-                time = rb1.text.toString()
+                time = rb3.text.toString()
             }
             rb4 -> {
                 rb1.isChecked = false
                 rb2.isChecked = false
                 rb3.isChecked = false
                 rb4.isChecked = true
-                time = rb1.text.toString()
+                time = rb4.text.toString()
             }
         }
     }
